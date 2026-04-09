@@ -1,6 +1,28 @@
 "use client";
 
+import { useState } from "react";
+
 export default function Home() {
+  const [numero, setNumero] = useState(null);
+  const [mensaje, setMensaje] = useState("Presiona el botón para saber qué tal me caes 😏");
+
+  const generarNumero = () => {
+    const random = Math.floor(Math.random() * 11); // 0 a 10
+    setNumero(random);
+
+    if (random === 10) {
+      setMensaje("🔥 ¡Me caes excelente!");
+    } else if (random >= 7) {
+      setMensaje("😎 Me caes bien");
+    } else if (random >= 4) {
+      setMensaje("🙂 Normal...");
+    } else if (random >= 1) {
+      setMensaje("😅 Mmm... ahí nomás");
+    } else {
+      setMensaje("💀 Uy... mejor ni hablamos");
+    }
+  };
+
   return (
     <main
       style={{
@@ -22,30 +44,30 @@ export default function Home() {
           boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
         }}
       >
-        <h1 style={{ color: "#ff7a18" }}>🚀 Bienvenido</h1>
+        <h1 style={{ color: "#ff7a18" }}>🎲 Nivel de amistad</h1>
 
-        <p style={{ color: "#555", marginBottom: "20px" }}>
-          Estás viendo tu primera página en Next.js Soy Andres.  
-          Aquí puedes comenzar a construir tu sistema de ventas paso a paso.
+        <p style={{ color: "#555", marginBottom: "15px" }}>
+          {mensaje}
         </p>
 
+        <h2 style={{ margin: "20px 0" }}>
+          {numero !== null ? `Resultado: ${numero}` : "?"}
+        </h2>
+
         <button
-          onClick={() => alert("¡Bien hecho Amigo! 🔥")}
+          onClick={generarNumero}
           style={{
-            padding: "12px 20px",
+            padding: "12px",
+            width: "100%",
             background: "#ff7a18",
             color: "white",
             border: "none",
             borderRadius: "8px",
             cursor: "pointer",
             fontWeight: "bold",
-            width: "100%",
-            transition: "0.3s",
           }}
-          onMouseOver={(e) => (e.target.style.background = "#e56700")}
-          onMouseOut={(e) => (e.target.style.background = "#ff7a18")}
         >
-          Comenzar 🚀
+          Probar suerte 🎲
         </button>
       </div>
     </main>
